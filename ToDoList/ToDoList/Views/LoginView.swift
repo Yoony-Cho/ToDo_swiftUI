@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State var viewModel = LoginViewViewModel()
+    @StateObject var viewModel = LoginViewViewModel()
 
     var body: some View {
         NavigationView {
@@ -19,12 +19,14 @@ struct LoginView: View {
                            angle: 15,
                            background: .pink)
 
-                if !viewModel.errorMessage.isEmpty {
-                    Text(viewModel.errorMessage)
-                        .foregroundColor(Color.red)
-                }
+               
                 // Login Form
                 Form {
+                    if !viewModel.errorMessage.isEmpty {
+                        Text(viewModel.errorMessage)
+                            .foregroundColor(Color.red)
+                    }
+                    
                     TextField("Email Address", text: $viewModel.email)
                         .textFieldStyle(DefaultTextFieldStyle())
                         .autocapitalization(.none)
